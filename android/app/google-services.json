@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776954515443",
+    "project_id": "booksellingapp-f263d",
+    "storage_bucket": "booksellingapp-f263d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776954515443:android:fd6e50da106c0a3a038c86",
+        "android_client_info": {
+          "package_name": "com.example.book_app_server_side"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCOknvEP9ykfurG2vilrQWL01wjRMRZx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
