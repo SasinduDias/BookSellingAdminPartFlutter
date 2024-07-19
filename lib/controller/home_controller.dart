@@ -15,10 +15,14 @@ class HomeController extends GetxController {
   TextEditingController bookPriceController = TextEditingController();
   TextEditingController bookImageURLController = TextEditingController();
 
-  @override
-  void onInit() {
-    bookCollection = firestore.collection('Book');
+  String category = "Fantacy";
 
+  List<Book> books = [];
+
+  @override
+  Future<void> onInit() async {
+    bookCollection = firestore.collection('Book');
+    await fetchBooks();
     super.onInit();
   }
 
@@ -29,7 +33,7 @@ class HomeController extends GetxController {
       Book book = Book(
         id: doc.id,
         author: bookNameController.text,
-        category: 'Category',
+        category: category,
         description: bookDescriptionController.text,
         imageURL: bookImageURLController.text,
         name: bookNameController.text,
@@ -40,10 +44,50 @@ class HomeController extends GetxController {
       doc.set(bookJson);
       Get.snackbar('Success', 'Book added successfully',
           colorText: Colors.white, backgroundColor: Colors.green);
+      setValueDefaulf();
     } catch (e) {
       Get.snackbar('Error', e.toString(),
           colorText: Colors.white, backgroundColor: Colors.red);
       print(e);
+    }
+  }
+
+  fetchBooks() async {
+    try {
+      QuerySnapshot bookSnapShot = await bookCollection.get();
+      final List<Book> retriveBooks = bookSnapShot.docs
+          .map((doc) => Book.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+
+      books.clear();
+      books.assignAll(retriveBooks);
+    } on Exception catch (e) {
+      Get.snackbar('Error', e.toString(),
+          colorText: Colors.white, backgroundColor: Colors.red);
+      print(e);
+    } finally {
+      update();
+    }
+  }
+
+  setValueDefaulf() {
+    bookNameController.clear();
+    bookAuthorController.clear();
+    bookCategoryController.clear();
+    bookDescriptionController.clear();
+    bookPriceController.clear();
+    bookImageURLController.clear();
+
+    update();
+  }
+
+  deleteBooks(String id) async {
+    try {
+      await bookCollection.doc(id).delete();
+      fetchBooks();
+    } on Exception catch (e) {
+      Get.snackbar('Error', e.toString(),
+          colorText: Colors.white, backgroundColor: Colors.red);
     }
   }
 }

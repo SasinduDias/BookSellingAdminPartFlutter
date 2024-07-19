@@ -25,13 +25,13 @@ class Book {
   int? price;
 
   Book({
-    required this.author,
-    required this.category,
-    required this.description,
-    required this.imageURL,
-    required this.name,
-    required this.price,
-    required String id,
+    this.author,
+    this.category,
+    this.description,
+    this.imageURL,
+    this.name,
+    this.price,
+    this.id,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);

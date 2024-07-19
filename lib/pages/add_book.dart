@@ -40,6 +40,7 @@ class AddBookDetail extends StatelessWidget {
                           color: Color.fromARGB(255, 159, 24, 248))),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: ctrl.bookNameController,
                     decoration: InputDecoration(
                         labelText: 'Book Title',
                         border: OutlineInputBorder(
@@ -49,6 +50,7 @@ class AddBookDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: ctrl.bookPriceController,
                     decoration: InputDecoration(
                         labelText: 'Book Price',
                         border: OutlineInputBorder(
@@ -58,6 +60,7 @@ class AddBookDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: ctrl.bookAuthorController,
                     decoration: InputDecoration(
                         labelText: 'Book Author Name',
                         border: OutlineInputBorder(
@@ -67,6 +70,7 @@ class AddBookDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: ctrl.bookDescriptionController,
                     decoration: InputDecoration(
                         labelText: 'Description',
                         border: OutlineInputBorder(
@@ -77,6 +81,7 @@ class AddBookDetail extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: ctrl.bookImageURLController,
                     decoration: InputDecoration(
                         labelText: 'Image URL',
                         border: OutlineInputBorder(
@@ -99,8 +104,11 @@ class AddBookDetail extends StatelessWidget {
                           'Politics',
                           'Other'
                         ],
-                        selectedValueText: 'Select Book Category',
-                        onSelected: (selectedValue) {},
+                        selectedValueText: ctrl.category,
+                        onSelected: (selectedValue) {
+                          ctrl.category = selectedValue ?? 'Fantasy';
+                          ctrl.update();
+                        },
                       )),
                   const SizedBox(height: 30),
                   ElevatedButton(

@@ -13,7 +13,7 @@ Book _$BookFromJson(Map<String, dynamic> json) => Book(
       imageURL: json['imageURL'] as String?,
       name: json['name'] as String?,
       price: (json['price'] as num?)?.toInt(),
-      id: json['id'] as String,
+      id: json['id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{

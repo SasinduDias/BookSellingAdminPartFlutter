@@ -25,13 +25,13 @@ class HomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: ctrl.books.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: const EdgeInsets.all(10),
                         child: ListTile(
                           title: Text(
-                            'Book $index',
+                            ctrl.books[index].name ?? '',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text(
-                            'Author $index',
+                            (ctrl.books[index].price ?? 0).toString(),
                             style: const TextStyle(
                               color: Color.fromARGB(255, 243, 102, 8),
                               fontSize: 15,
@@ -48,13 +48,19 @@ class HomePage extends StatelessWidget {
                           ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
-                            onPressed: () {},
+                            onPressed: () {
+                              ctrl.deleteBooks(ctrl.books[index].id ?? '');
+                            },
                           ),
-                          leading: const Icon(
-                            Icons.book_rounded,
-                            color: Color.fromARGB(255, 208, 243, 8),
-                            size: 30,
-                          ),
+                          leading: (ctrl.books[index].imageURL != null &&
+                                  ctrl.books[index].imageURL!.isNotEmpty)
+                              ? Image.network(
+                                  ctrl.books[index].imageURL!,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Icon(Icons.broken_image, size: 20);
+                                  },
+                                )
+                              : Icon(Icons.image_not_supported, size: 20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
