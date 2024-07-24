@@ -13,18 +13,30 @@ class AddBookDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Scaffold(
-          appBar: AppBar(
-              iconTheme: const IconThemeData(color: Colors.black),
-              title: const Text(
-                'Add Book',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              )
-              // backgroundColor: Colors.white,
-              ),
-          body: SingleChildScrollView(
+        body: Column(children: [
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    ctrl.fetchBooks();
+                  },
+                ),
+                const Text(
+                  "Add Book",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ),
+          SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(7),
               color: Color.fromARGB(255, 19, 216, 206),
@@ -131,7 +143,9 @@ class AddBookDetail extends StatelessWidget {
                 ],
               ),
             ),
-          ));
+          )
+        ]),
+      );
     });
   }
 }
